@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
+import "@picocss/pico";
+import "./index.css";
 
 // Import ThirdWeb
 import { ThirdwebWeb3Provider } from '@3rdweb/hooks';

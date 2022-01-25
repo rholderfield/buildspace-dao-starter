@@ -3,7 +3,7 @@ import { ethers } from "ethers";
 
 import { useWeb3 } from "@3rdweb/hooks";
 import { ThirdwebSDK } from "@3rdweb/sdk";
-import { UnsupportedChainIdError } from "@web3-react/core";
+// import { UnsupportedChainIdError } from "@web3-react/core";
 
 const sdk = new ThirdwebSDK("rinkeby");
 
@@ -77,7 +77,6 @@ const App = () => {
         console.error("failed to get token amounts", err);
       });
   }, [hasClaimedNFT]);
-
 
   // Now, we combine the memberAddresses and memberTokenAmounts into a single array
   const memberList = useMemo(() => {
@@ -174,11 +173,14 @@ const App = () => {
 
   if (error && error.name === "UnsupportedChainIdError") {
     return (
-      <div className="unsupported-network">
+      <div className="unsupported-network container">
+        <header>
+        <br />
         <h2>Please connect to Rinkeby</h2>
+        </header>
         <p>
-          This dapp only works on the Rinkeby network, please switch networks
-          in your connected wallet.
+          This dapp only works on the Rinkeby network, please switch networks in
+          your connected wallet.
         </p>
       </div>
     );
@@ -186,11 +188,19 @@ const App = () => {
 
   if (!address) {
     return (
-      <div className="landing">
-        <h1>Welcome to PlantATree DAO</h1>
-        <button onClick={() => connectWallet("injected")} className="btn-hero">
-          Connect your wallet
-        </button>
+      <div className="container">
+        <header>
+          <br />
+          <h1>Welcome to PlantATree DAO</h1>
+        </header>
+        <img src="..\yew.png" alt="yew"></img>
+        <br />
+        <p>Let's start by connecting your wallet below!</p>
+        <footer>
+          <button onClick={() => connectWallet("injected")}>
+            Connect your wallet
+          </button>
+        </footer>
       </div>
     );
   }
@@ -217,49 +227,26 @@ const App = () => {
       });
   };
 
-  if (!address) {
-    return (
-      <div className="landing">
-        <h1>Welcome to PlantATree DAO</h1>
-        <button onClick={() => connectWallet("injected")} className="btn-hero">
-          Connect your wallet
-        </button>
-      </div>
-    );
-  }
-
   // Add this little piece!
   // If the user has already claimed their NFT we want to display the interal DAO page to them
   // only DAO members will see this. Render all the members + token amounts.
   if (hasClaimedNFT) {
     return (
-      <div className="member-page">
-        <h1>🌲 DAO Member Page</h1>
-        <p>Congratulations on being a member</p>
-        <div>
+      <div className="container">
+        <header>
+          <br />
+          <h1><img className="yew" src="../yew.png" alt="yew"></img>DAO Member Page</h1>
+        <img src="..\hero.png" alt="forest"></img>
+        <br />
+        </header>
+        <br />
+        <p>Welcome to your hero's journey</p>
+        <div className="grid">
+    
           <div>
-            <h2>Member List</h2>
-            <table className="card">
-              <thead>
-                <tr>
-                  <th>Address</th>
-                  <th>Token Amount</th>
-                </tr>
-              </thead>
-              <tbody>
-                {memberList.map((member) => {
-                  return (
-                    <tr key={member.address}>
-                      <td>{shortenAddress(member.address)}</td>
-                      <td>{member.tokenAmount}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-          <div>
+            <header>
             <h2>Active Proposals</h2>
+            </header>
             <form
               onSubmit={async (e) => {
                 e.preventDefault();
@@ -348,11 +335,13 @@ const App = () => {
               }}
             >
               {proposals.map((proposal, index) => (
-                <div key={proposal.proposalId} className="card">
+                <article key={proposal.proposalId} className="card">
+                  <header>
                   <h5>{proposal.description}</h5>
-                  <div>
+                  </header>
+                  <div className="vote">
                     {proposal.votes.map((vote) => (
-                      <div key={vote.type}>
+                      <div className="voteKey" key={vote.type}>
                         <input
                           type="radio"
                           id={proposal.proposalId + "-" + vote.type}
@@ -367,14 +356,14 @@ const App = () => {
                       </div>
                     ))}
                   </div>
-                </div>
+                </article>
               ))}
               <button disabled={isVoting || hasVoted} type="submit">
                 {isVoting
                   ? "Voting..."
                   : hasVoted
-                    ? "You Already Voted"
-                    : "Submit Votes"}
+                  ? "You Already Voted"
+                  : "Submit Votes"}
               </button>
               <small>
                 This will trigger multiple transactions that you will need to
@@ -382,18 +371,47 @@ const App = () => {
               </small>
             </form>
           </div>
+          <div>
+            <h2>Member List</h2>
+            <table className="card">
+              <thead>
+                <tr>
+                  <th>Address</th>
+                  <th>Token Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {memberList.map((member) => {
+                  return (
+                    <tr key={member.address}>
+                      <td>{shortenAddress(member.address)}</td>
+                      <td>{member.tokenAmount}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     );
-  };
+  }
 
   // Render mint nft screen.
   return (
-    <div className="mint-nft">
-      <h1>Mint your free 🍪DAO Membership NFT</h1>
-      <button disabled={isClaiming} onClick={() => mintNft()}>
-        {isClaiming ? "Minting..." : "Mint your nft (FREE)"}
-      </button>
+    <div className="container">
+      <header>
+        <br /> 
+        <h1>Mint your PlantATree DAO Membership Card</h1>
+      </header>
+      <img src="../seedling.png" alt="seedling"></img>
+      <br />
+      <p>Join our community today and participate in the movement of the future.</p>
+      <footer>
+        <button disabled={isClaiming} onClick={() => mintNft()}>
+          {isClaiming ? "Minting..." : "Mint NFT Membership Card (FREE)"}
+        </button>
+      </footer>
     </div>
   );
 };
