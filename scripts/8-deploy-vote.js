@@ -2,7 +2,7 @@ import sdk from "./1-initialize-sdk.js";
 
 // Grab the app module address.
 const appModule = sdk.getAppModule(
-  "0x464B2dcdd3c0778199B2FE04637fd09Fa69AE18B",
+  "0x718ac1E2AE70c8d9f769750531afb24425c816ce",
 );
 
 (async () => {
@@ -12,7 +12,7 @@ const appModule = sdk.getAppModule(
       name: "PlantATree's Epic Proposals",
 
       // This is the location of our governance token, our ERC-20 contract!
-      votingTokenAddress: "0x0dD155feB85E462483141a8D7D19b122C193796A",
+      votingTokenAddress: "0x23F2DC0CAd81d7391d1CafD8531FE1a258Ca5982",
 
       // After a proposal is created, when can members start voting?
       // For now, we set this to immediately.

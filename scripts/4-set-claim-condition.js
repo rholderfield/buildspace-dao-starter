@@ -1,7 +1,7 @@
 import sdk from "./1-initialize-sdk.js";
 
 const bundleDrop = sdk.getBundleDropModule(
-  "0x1b5068C28A0F1d51a454192D09eC3dfE5f962734",
+  "0x34cCA412c845498Dfd63EEDe9357c3783e824b93",
 );
 
 (async () => {
@@ -10,7 +10,7 @@ const bundleDrop = sdk.getBundleDropModule(
     // Specify conditions.
     claimConditionFactory.newClaimPhase({
       startTime: new Date(),
-      maxQuantity: 10_000,
+      maxQuantity: 600,
       maxQuantityPerTransaction: 1,
     });
     

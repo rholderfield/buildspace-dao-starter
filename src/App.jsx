@@ -8,15 +8,15 @@ import { ThirdwebSDK } from "@3rdweb/sdk";
 const sdk = new ThirdwebSDK("rinkeby");
 
 const bundleDropModule = sdk.getBundleDropModule(
-  "0x1b5068C28A0F1d51a454192D09eC3dfE5f962734"
+  "0x34cCA412c845498Dfd63EEDe9357c3783e824b93"
 );
 
 const tokenModule = sdk.getTokenModule(
-  "0x0dD155feB85E462483141a8D7D19b122C193796A"
+  "0x23F2DC0CAd81d7391d1CafD8531FE1a258Ca5982"
 );
 
 const voteModule = sdk.getVoteModule(
-  "0x3dcB3576D32F01Dd04C6a6DF71E8BC52dde32579"
+  "0xB2F506c5F8246Af927D0D0b55ffd2081c570971A"
 );
 
 const App = () => {
